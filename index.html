@@ -12,9 +12,38 @@
     <meta property="og:type" content="website" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   </head>
   <body>
+    <!-- Command Palette Modal -->
+    <div id="command-palette" class="command-palette">
+      <div class="command-palette-backdrop"></div>
+      <div class="command-palette-container">
+        <div class="command-palette-header">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" id="command-input" class="command-input" placeholder="Type a command..." autocomplete="off" />
+          <kbd class="command-kbd">ESC</kbd>
+        </div>
+        <div class="command-palette-divider"></div>
+        <div id="command-results" class="command-results"></div>
+      </div>
+    </div>
+
+    <!-- Easter Egg Overlay -->
+    <div id="easter-egg-overlay" class="easter-egg-overlay">
+      <div class="easter-egg-content">
+        <div class="easter-egg-emoji">🎮</div>
+        <h2>Achievement Unlocked!</h2>
+        <p>You found the secret Konami Code easter egg!</p>
+        <p class="easter-egg-sub">↑ ↑ ↓ ↓ ← → ← → B A</p>
+        <button id="easter-egg-close" class="btn btn-primary">Nice! 🎉</button>
+      </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div id="cursor-dot" class="cursor-dot"></div>
+    <div id="cursor-ring" class="cursor-ring"></div>
+
     <!-- Project Detail Page (hidden by default) -->
     <div id="project-detail-page" class="project-detail-page"></div>
 
@@ -23,7 +52,7 @@
       <!-- Navigation -->
       <nav id="navbar" class="navbar">
         <div class="nav-container">
-          <a href="#hero" class="nav-logo">
+          <a href="#hero" class="nav-logo" data-magnetic>
             <span class="logo-bracket">&lt;</span>CD<span class="logo-bracket">/&gt;</span>
           </a>
           <ul class="nav-links">
@@ -33,11 +62,20 @@
             <li><a href="#experience" class="nav-link" data-section="experience">Experience</a></li>
             <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
           </ul>
-          <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-          </button>
+          <div class="nav-actions">
+            <button id="cmd-k-hint" class="cmd-k-hint" data-magnetic aria-label="Open command palette">
+              <kbd>⌘</kbd><kbd>K</kbd>
+            </button>
+            <a href="/CV_ChristianDinata.pdf" download class="btn btn-cv-nav" data-magnetic id="nav-cv-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>CV</span>
+            </a>
+            <button id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -49,6 +87,12 @@
           <li><a href="#projects" class="mobile-nav-link">Projects</a></li>
           <li><a href="#experience" class="mobile-nav-link">Experience</a></li>
           <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+          <li>
+            <a href="/CV_ChristianDinata.pdf" download class="mobile-nav-link mobile-cv-link">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download CV
+            </a>
+          </li>
         </ul>
       </div>
 
@@ -56,14 +100,42 @@
       <section id="hero" class="hero">
         <div class="hero-bg-overlay"></div>
         <canvas id="particles-canvas"></canvas>
+        <!-- Animated grid background -->
+        <div class="hero-grid-bg"></div>
         <div class="hero-content">
           <div class="hero-badge">
             <span class="badge-dot"></span>
             Available for Work
           </div>
+
+          <!-- Interactive Terminal -->
+          <div class="hero-terminal" id="hero-terminal">
+            <div class="terminal-bar">
+              <div class="terminal-dots">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <span class="terminal-title">christian@portfolio ~ %</span>
+              <div class="terminal-actions">
+                <button class="terminal-copy-btn" id="terminal-copy" title="Copy to clipboard">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="terminal-body" id="terminal-body">
+              <div class="terminal-line">
+                <span class="terminal-prompt">$</span>
+                <span class="terminal-command" id="terminal-cmd"></span>
+                <span class="terminal-cursor-block">█</span>
+              </div>
+              <div class="terminal-output" id="terminal-output"></div>
+            </div>
+          </div>
+
           <h1 class="hero-title">
             <span class="hero-greeting">Hi, I'm</span>
-            <span class="hero-name">Christian Dinata</span>
+            <span class="hero-name glitch-text" data-text="Christian Dinata">Christian Dinata</span>
           </h1>
           <p class="hero-subtitle">
             <span class="typed-text" id="typed-text"></span><span class="cursor">|</span>
@@ -75,11 +147,15 @@
             <span class="highlight">on-chain gaming</span>.
           </p>
           <div class="hero-cta">
-            <a href="#projects" class="btn btn-primary" id="cta-projects">
+            <a href="#projects" class="btn btn-primary btn-glow" id="cta-projects" data-magnetic>
               <span>View Projects</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7.8M17 7.8H7.8"/></svg>
             </a>
-            <a href="#contact" class="btn btn-secondary" id="cta-contact">
+            <a href="/CV_ChristianDinata.pdf" download class="btn btn-cv btn-glow" id="cta-cv" data-magnetic>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>Download CV</span>
+            </a>
+            <a href="#contact" class="btn btn-secondary" id="cta-contact" data-magnetic>
               <span>Get In Touch</span>
             </a>
           </div>
@@ -120,6 +196,11 @@
                 <img src="/avatar.png" alt="Christian Dinata" class="about-image" />
               </div>
               <div class="about-image-decoration"></div>
+              <!-- Status card floating beside avatar -->
+              <div class="about-status-card">
+                <div class="status-indicator"></div>
+                <span>Building on-chain rn</span>
+              </div>
             </div>
             <div class="about-text">
               <p class="about-intro">
@@ -159,6 +240,15 @@
                   </div>
                 </div>
               </div>
+              <!-- CV Download in About -->
+              <div class="about-cv-section">
+                <p class="about-cv-text">Want the full picture?</p>
+                <a href="/CV_ChristianDinata.pdf" download class="btn btn-cv-about" data-magnetic>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                  <span>Download my CV</span>
+                  <div class="btn-shine"></div>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -173,7 +263,7 @@
             <div class="section-divider"></div>
           </div>
           <div class="skills-grid">
-            <div class="skill-category" data-aos="fade-up">
+            <div class="skill-category" data-tilt>
               <div class="skill-category-icon">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
               </div>
@@ -187,8 +277,9 @@
                 <span class="skill-tag">Lua</span>
                 <span class="skill-tag">Python</span>
               </div>
+              <div class="card-glow"></div>
             </div>
-            <div class="skill-category" data-aos="fade-up" data-aos-delay="100">
+            <div class="skill-category" data-tilt>
               <div class="skill-category-icon">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
               </div>
@@ -202,8 +293,9 @@
                 <span class="skill-tag">Wagmi / Viem</span>
                 <span class="skill-tag">The Graph</span>
               </div>
+              <div class="card-glow"></div>
             </div>
-            <div class="skill-category" data-aos="fade-up" data-aos-delay="200">
+            <div class="skill-category" data-tilt>
               <div class="skill-category-icon">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
               </div>
@@ -217,8 +309,9 @@
                 <span class="skill-tag">REST APIs</span>
                 <span class="skill-tag">Docker</span>
               </div>
+              <div class="card-glow"></div>
             </div>
-            <div class="skill-category" data-aos="fade-up" data-aos-delay="300">
+            <div class="skill-category" data-tilt>
               <div class="skill-category-icon">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
               </div>
@@ -230,8 +323,9 @@
                 <span class="skill-tag">Framer Motion</span>
                 <span class="skill-tag">Wallet SDKs</span>
               </div>
+              <div class="card-glow"></div>
             </div>
-            <div class="skill-category" data-aos="fade-up" data-aos-delay="400">
+            <div class="skill-category" data-tilt>
               <div class="skill-category-icon">
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
               </div>
@@ -243,6 +337,7 @@
                 <span class="skill-tag">Subgraphs</span>
                 <span class="skill-tag">Merkle Trees</span>
               </div>
+              <div class="card-glow"></div>
             </div>
           </div>
         </div>
@@ -281,7 +376,7 @@
             <div class="section-divider"></div>
           </div>
           <div class="timeline">
-            <div class="timeline-item" data-aos="fade-right">
+            <div class="timeline-item">
               <div class="timeline-marker"></div>
               <div class="timeline-content">
                 <div class="timeline-header">
@@ -301,7 +396,7 @@
                 </div>
               </div>
             </div>
-            <div class="timeline-item" data-aos="fade-left">
+            <div class="timeline-item">
               <div class="timeline-marker"></div>
               <div class="timeline-content">
                 <div class="timeline-header">
@@ -319,7 +414,7 @@
                 </div>
               </div>
             </div>
-            <div class="timeline-item" data-aos="fade-right">
+            <div class="timeline-item">
               <div class="timeline-marker"></div>
               <div class="timeline-content">
                 <div class="timeline-header">
@@ -338,7 +433,7 @@
                 </div>
               </div>
             </div>
-            <div class="timeline-item" data-aos="fade-left">
+            <div class="timeline-item">
               <div class="timeline-marker"></div>
               <div class="timeline-content">
                 <div class="timeline-header">
@@ -400,6 +495,16 @@
                 </div>
                 <svg class="contact-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7.8M17 7.8H7.8"/></svg>
               </a>
+              <a href="/CV_ChristianDinata.pdf" download class="contact-card contact-card-cv" id="contact-cv">
+                <div class="contact-card-icon contact-cv-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                </div>
+                <div>
+                  <strong>Resume / CV</strong>
+                  <span>Download PDF</span>
+                </div>
+                <svg class="contact-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </a>
             </div>
           </div>
         </div>
@@ -413,6 +518,7 @@
               <span class="logo-bracket">&lt;</span>CD<span class="logo-bracket">/&gt;</span>
             </span>
             <p>&copy; 2026 Christian Dinata. Built with ☕ and passion.</p>
+            <p class="footer-hint">Press <kbd>⌘</kbd><kbd>K</kbd> to navigate • <kbd>↑↑↓↓←→←→BA</kbd> for a surprise</p>
           </div>
         </div>
       </footer>
