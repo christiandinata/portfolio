@@ -88,13 +88,13 @@ function typeTerminalCommand() {
 
   function typeChar() {
     if (i < cmd.length) {
-      cmdEl.textContent += cmd[i];
+      cmdEl!.textContent += cmd[i];
       i++;
       setTimeout(typeChar, 50 + Math.random() * 40);
     } else {
       if (cursorEl) cursorEl.style.display = 'none';
       setTimeout(() => {
-        outputEl.innerHTML = output;
+        outputEl!.innerHTML = output;
         setTimeout(() => {
           termCmdIdx = (termCmdIdx + 1) % terminalCommands.length;
           setTimeout(typeTerminalCommand, 2500);
@@ -167,12 +167,12 @@ function initCustomCursor() {
   const ring = document.getElementById('cursor-ring');
   if (!dot || !ring) return;
   let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; dot.style.transform = `translate(${mx - 3}px, ${my - 3}px)`; });
-  function animateRing() { rx += (mx - rx) * 0.15; ry += (my - ry) * 0.15; ring.style.transform = `translate(${rx - 18}px, ${ry - 18}px)`; requestAnimationFrame(animateRing); }
+  document.addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; dot!.style.transform = `translate(${mx - 3}px, ${my - 3}px)`; });
+  function animateRing() { rx += (mx - rx) * 0.15; ry += (my - ry) * 0.15; ring!.style.transform = `translate(${rx - 18}px, ${ry - 18}px)`; requestAnimationFrame(animateRing); }
   animateRing();
   document.querySelectorAll('a, button, [data-magnetic], .project-card-featured, .filter-btn, .skill-tag').forEach(el => {
-    el.addEventListener('mouseenter', () => ring.classList.add('hover'));
-    el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+    el.addEventListener('mouseenter', () => ring!.classList.add('hover'));
+    el.addEventListener('mouseleave', () => ring!.classList.remove('hover'));
   });
 }
 
@@ -206,30 +206,30 @@ function initCommandPalette() {
 
   let activeIdx = 0;
 
-  function open() { palette.classList.add('active'); input.value = ''; input.focus(); renderResults(''); }
-  function close() { palette.classList.remove('active'); }
+  function open() { palette!.classList.add('active'); input.value = ''; input.focus(); renderResults(''); }
+  function close() { palette!.classList.remove('active'); }
 
   function renderResults(query: string) {
     const filtered = commandItems.filter(i => i.label.toLowerCase().includes(query.toLowerCase()));
     activeIdx = 0;
-    results.innerHTML = filtered.map((item, i) =>
+    results!.innerHTML = filtered.map((item, i) =>
       `<div class="command-item ${i===0?'active':''}" data-idx="${i}">
         <div class="command-item-icon">${item.icon}</div>
         <span class="command-item-label">${item.label}</span>
         ${item.shortcut ? `<span class="command-item-shortcut">${item.shortcut}</span>` : ''}
       </div>`
     ).join('');
-    results.querySelectorAll('.command-item').forEach((el, i) => {
+    results!.querySelectorAll('.command-item').forEach((el, i) => {
       el.addEventListener('click', () => { filtered[i].action(); close(); });
-      el.addEventListener('mouseenter', () => { results.querySelectorAll('.command-item').forEach(e=>e.classList.remove('active')); el.classList.add('active'); activeIdx=i; });
+      el.addEventListener('mouseenter', () => { results!.querySelectorAll('.command-item').forEach(e=>e.classList.remove('active')); el.classList.add('active'); activeIdx=i; });
     });
   }
 
   document.addEventListener('keydown', (e) => {
-    if ((e.metaKey||e.ctrlKey) && e.key === 'k') { e.preventDefault(); palette.classList.contains('active') ? close() : open(); }
-    if (e.key === 'Escape' && palette.classList.contains('active')) close();
-    if (palette.classList.contains('active')) {
-      const items = results.querySelectorAll('.command-item');
+    if ((e.metaKey||e.ctrlKey) && e.key === 'k') { e.preventDefault(); palette!.classList.contains('active') ? close() : open(); }
+    if (e.key === 'Escape' && palette!.classList.contains('active')) close();
+    if (palette!.classList.contains('active')) {
+      const items = results!.querySelectorAll('.command-item');
       if (e.key==='ArrowDown') { e.preventDefault(); activeIdx=Math.min(activeIdx+1,items.length-1); items.forEach(i=>i.classList.remove('active')); items[activeIdx]?.classList.add('active'); items[activeIdx]?.scrollIntoView({block:'nearest'}); }
       if (e.key==='ArrowUp') { e.preventDefault(); activeIdx=Math.max(activeIdx-1,0); items.forEach(i=>i.classList.remove('active')); items[activeIdx]?.classList.add('active'); items[activeIdx]?.scrollIntoView({block:'nearest'}); }
       if (e.key==='Enter') { const filtered=commandItems.filter(i=>i.label.toLowerCase().includes(input.value.toLowerCase())); if(filtered[activeIdx]){filtered[activeIdx].action(); close();} }
