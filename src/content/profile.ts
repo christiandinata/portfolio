@@ -11,7 +11,7 @@ export const profile = {
   linkedin: 'https://linkedin.com/in/christiandinata',
   status: 'Open to Product Engineer roles',
   intro:
-    'I’m Christian, a product engineer in Indonesia. I work with clients and users to pin down the real problem, help scope it, then build and ship it across frontend and backend. 4 years across fintech, gaming and consumer products; currently a product engineer at Pixel8Labs.',
+    'I’m Christian, a product engineer in Indonesia. I work with clients and users to pin down the real problem, help scope it, then build and ship it across frontend and backend. 4 years across fintech, gaming and consumer products; currently a product engineer at Pixel8Labs, building Dome.',
   summary:
     'Christian Dinata is a product engineer who works with clients and users to scope products, then builds and ships them across frontend and backend. 4 years across fintech, gaming and consumer products.',
   /** Square headshot in /public. Leave empty to show the monogram instead. */
@@ -41,10 +41,10 @@ export const glance = [
 export const loop = [
   {
     stage: 'Listen',
-    principle: 'Shape the product around each client’s rules.',
-    evidence: 'On Ramen Finance I handled 10+ launch partners, each with its own sale rules, timeline and community, from setup through to claims.',
-    source: 'Ramen Finance · Pixel8Labs',
-    slug: 'ramen-finance',
+    principle: 'Build around how the client actually works.',
+    evidence: 'On Dome I work with BlockOffice’s corporate-secretary team on their real procedures, so the product keeps their Drive files and moved every existing client in rather than asking them to start over.',
+    source: 'Dome · Pixel8Labs',
+    slug: 'dome',
   },
   {
     stage: 'Research',
@@ -61,9 +61,9 @@ export const loop = [
   {
     stage: 'Ship',
     principle: 'Own the whole slice, frontend to backend.',
-    evidence: 'Worked frontend and backend on the Ramen Finance launchpad and handled 10+ launches on it. For W3GG, shipped Xsolla subscriptions and Steam integration.',
-    source: 'Ramen Finance',
-    slug: 'ramen-finance',
+    evidence: 'Started Dome’s codebase and shipped it end to end, from sign-in to banking. On Ramen Finance, worked frontend and backend and handled 10+ launches.',
+    source: 'Dome · Ramen Finance',
+    slug: 'dome',
   },
   {
     stage: 'Learn',
@@ -77,6 +77,6 @@ export const toolkit = [
   { group: 'Product', items: ['User interviews & surveys', 'Figma prototyping', 'Product analytics', 'Scoping & specs'] },
   { group: 'Frontend', items: ['TypeScript', 'React', 'Next.js', 'Tailwind', 'Vite'] },
   { group: 'Backend', items: ['Go', 'Node.js', 'PostgreSQL', 'Redis', 'REST APIs'] },
-  { group: 'Integrations', items: ['Payments (Xsolla)', 'Steam API', 'Wallet sign-in', 'Google Analytics'] },
-  { group: 'Infra', items: ['GCP Cloud Run', 'Docker', 'GitHub Actions', 'CI/CD'] },
+  { group: 'Integrations', items: ['Banking & payments APIs', 'Claude API', 'Google Drive & Docs', 'Xsolla', 'Steam API'] },
+  { group: 'Infra', items: ['GCP (GKE, Cloud Run)', 'Cloudflare Workers', 'Pulumi', 'Docker', 'GitHub Actions'] },
 ];

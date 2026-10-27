@@ -6,14 +6,16 @@ export const experience: Role[] = [
     company: 'Pixel8Labs (subsidiary of BlockOffice)',
     period: 'Oct 2023 — Present',
     summary:
-      'Product engineer on partner products (Onboard, BlockOffice, Mad Meerkats, Ramen Finance and W3GG), working across frontend and backend from scope to release.',
+      'Product engineer on partner products (Dome, Ramen Finance, W3GG, Mad Meerkats and Onboard), working with each client from scope to release across frontend and backend.',
     points: [
+      "Dome: started the codebase and am its top contributor (280+ commits), working with BlockOffice's corporate-services team to put incorporation, compliance and banking for client companies on one platform.",
+      'Dome: moved existing client records from Airtable and a legacy corporate-secretary tool, added AI document extraction with staff approval, and built client-owned banking with guided account opening and approved payments.',
       'Handled 10+ projects on the Ramen Finance launchpad, collectively raising over 1M BERA through lottery registration, private sales and public sales.',
       'Worked across frontend and backend to build Ramen Finance, letting projects run token sales for their communities.',
       'Shipped a W3GG subscription plan with Xsolla as payment gateway, plus Steam integration for quest verification and profile showcases.',
       "Built W3GG's quest reward system: XP, rewards, achievement verification and claims.",
     ],
-    stack: ['Go', 'TypeScript', 'PostgreSQL', 'Redis', 'Docker', 'GCP'],
+    stack: ['Go', 'TypeScript', 'Next.js', 'PostgreSQL', 'Redis', 'Docker', 'GCP', 'Claude API'],
   },
   {
     title: 'Information Technology Web Developer',

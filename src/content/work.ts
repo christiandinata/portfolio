@@ -2,6 +2,63 @@ import type { CaseStudy, LabItem } from './types';
 
 export const work: CaseStudy[] = [
   {
+    slug: 'dome',
+    title: 'Dome',
+    tagline: 'One place where a company incorporates, verifies once, banks and stays compliant, backed by BlockOffice’s corporate-services team.',
+    year: '2026',
+    company: 'Pixel8Labs',
+    role: 'Product engineer (full-stack)',
+    domain: 'Fintech',
+    hue: 235,
+    liveUrl: 'https://dome.finance/',
+    stack: ['Go', 'Next.js', 'TypeScript', 'PostgreSQL', 'GKE', 'Cloudflare', 'Claude API'],
+    metrics: [
+      { value: '280+', label: 'commits, the most on the team' },
+      { value: '10+', label: 'jurisdictions on one platform' },
+    ],
+    problem:
+      'BlockOffice runs incorporation, filings and banking for client companies across Singapore, BVI, Cayman, Hong Kong and more. That work lived across Airtable, Google Drive, an older corporate-secretary tool and email. Staff had no single record they could trust per company, and clients repeated the same identity checks for every service.',
+    decisions: [
+      'We kept Google Drive as the document store staff already trusted and made Dome the record on top, so nobody had to move files or change habits on day one.',
+      'We moved every existing client in from Airtable and the old corporate-secretary tool, so staff opened Dome to their whole portfolio, not an empty app.',
+      'We let AI read uploaded company documents and propose updates, but a staff member approves each change before it reaches the record.',
+      'We asked clients to verify once and reused it across incorporation and banking, so nobody resubmits the same documents.',
+      'We made banking client-owned: clients open and run their own accounts inside Dome, and staff step in only when invited.',
+      'We showed only what the data could back: plain statuses, refusals that say how to fix them, and nothing labelled live unless it is.',
+    ],
+    built: [
+      'Started the codebase and shipped the first version: Google sign-in, companies, directors with encrypted personal data, Drive-backed files, filing reminders by email, document templates and invite-only client access.',
+      'Importers that moved existing client records from Airtable and the previous corporate-secretary system into Dome.',
+      'AI document extraction with Claude, feeding a review screen where staff approve each proposed change, plus a cap table with transfers, buybacks and splits.',
+      'Self-serve incorporation forms for Singapore and BVI, with validation and per-person document uploads.',
+      'Dome Banking, rolling out on staging first: guided account opening, multi-currency balances, payments to bank accounts and stablecoin wallets with approvals, statements, insights and a background sync clients opt into.',
+    ],
+    outcome:
+      'Dome is live at dome.finance. Clients incorporate and verify once in the same product they bank in, and staff see where any company stands from one page.',
+    shots: [
+      {
+        src: '/img/dome/landing.webp',
+        alt: "Dome landing page: the headline 'Incorporate. Report. Pay and Receive.', a picker for Incorporate, Payments & Banking, Accounting & Taxes and Fundraising, and a glass dome over buildings labelled US, BVI, Cayman, SG, HK, UAE and MY.",
+        caption: 'Dome: every corporate service under one roof',
+      },
+      {
+        src: '/img/dome/overview.webp',
+        alt: 'Dome Banking overview for a sample company: a USD balance with SGD and USDC balances, one payment waiting for approval, a six-month money in and out chart, and recent activity.',
+        caption: 'Banking overview, on sample data',
+      },
+      {
+        src: '/img/dome/open-banking.webp',
+        alt: "Open Dome Banking, step 4 of 6: a step list on the left with three steps done, and a 'Verify your company and yourself' form prefilled from the company's records.",
+        caption: 'Account opening: prefilled from what Dome already knows',
+      },
+      {
+        src: '/img/dome/payment-approval.webp',
+        alt: "A stablecoin payment waiting for approval: a Created, Approval, Submission, Completion tracker, a quote countdown, the amount sent and fee, and an 'Approve this payment' button.",
+        caption: 'Payments: every step and fee shown before approval',
+      },
+    ],
+  },
+  {
     slug: 'ramen-finance',
     title: 'Ramen Finance',
     tagline: 'A launchpad where new projects run fair sales to their real community, not to bots.',
