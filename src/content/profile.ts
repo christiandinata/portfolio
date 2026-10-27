@@ -11,7 +11,7 @@ export const profile = {
   linkedin: 'https://linkedin.com/in/christiandinata',
   status: 'Open to Product Engineer roles',
   intro:
-    'I’m Christian, a product engineer in Indonesia. I work with clients and users to pin down the real problem, help scope it, then build and ship it across frontend and backend. 4 years across fintech, gaming and consumer products; currently a full-stack engineer at Pixel8Labs.',
+    'I’m Christian, a product engineer in Indonesia. I work with clients and users to pin down the real problem, help scope it, then build and ship it across frontend and backend. 4 years across fintech, gaming and consumer products; currently a product engineer at Pixel8Labs.',
   summary:
     'Christian Dinata is a product engineer who works with clients and users to scope products, then builds and ships them across frontend and backend. 4 years across fintech, gaming and consumer products.',
   /** Square headshot in /public. Leave empty to show the monogram instead. */
@@ -29,7 +29,7 @@ export const proof = [
 /** Recruiter quick-scan card. */
 export const glance = [
   { k: 'Looking for', v: 'Product Engineer (full‑stack)' },
-  { k: 'Currently', v: 'Full‑stack Engineer, Pixel8Labs' },
+  { k: 'Currently', v: 'Product Engineer, Pixel8Labs' },
   { k: 'Based in', v: 'Indonesia · GMT+7 · Remote-ready' },
   { k: 'Core stack', v: 'TypeScript, React/Next.js, Go, PostgreSQL' },
   { k: 'Also', v: 'Figma, user research, product analytics' },

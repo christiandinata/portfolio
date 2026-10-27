@@ -2,11 +2,11 @@ import type { Role } from './types';
 
 export const experience: Role[] = [
   {
-    title: 'Full-stack Engineer',
+    title: 'Product Engineer',
     company: 'Pixel8Labs (subsidiary of BlockOffice)',
     period: 'Oct 2023 — Present',
     summary:
-      'Full-stack engineer on partner products (Onboard, BlockOffice, Mad Meerkats, Ramen Finance and W3GG), working across frontend and backend from scope to release.',
+      'Product engineer on partner products (Onboard, BlockOffice, Mad Meerkats, Ramen Finance and W3GG), working across frontend and backend from scope to release.',
     points: [
       'Handled 10+ projects on the Ramen Finance launchpad, collectively raising over 1M BERA through lottery registration, private sales and public sales.',
       'Worked across frontend and backend to build Ramen Finance, letting projects run token sales for their communities.',
